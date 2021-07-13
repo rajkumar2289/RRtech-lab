@@ -1,0 +1,14 @@
+---
+
+  java_version: java-1.8.0-openjdk
+  javahome: jre-1.8.0-openjdk-1.8.0.292.b10-1.el7_9.x86_64
+  list_of_packages:
+    - wget
+    - git
+    - maven
+    - vim
+    - tree
+  tomcat_port: 8090
+  tomcat_version: 9.0.50
+  tomcat_url: https://downloads.apache.org/tomcat/tomcat-{{tomcat_version.split('.')[0]}}/v{{tomcat_version}}/bin/apache-tomcat-{{tomcat_version}}.tar.gz
+

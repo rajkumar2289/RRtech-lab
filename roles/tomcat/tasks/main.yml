@@ -1,0 +1,42 @@
+---
+# tasks file for tomcat1
+
+
+- name: update yum repository
+  yum:
+    name: '*'
+    state: present
+
+- name: install a list of packages
+  yum:
+    name: "{{ list_of_packages }}"
+    state: present
+
+- name: install java
+  yum:
+    name: "{{java_version}}"
+    state: present
+
+- name: set java default
+  alternatives:
+    name: java
+    link: /usr/bin/java
+    path: /usr/lib/jvm/{{javahome}}/bin/java
+
+- name: Downloading Tomcat
+  get_url: 
+    url: "{{tomcat_url}}"
+    dest: /usr/local
+    force: no
+    
+- name: Extracting tomcat downloaded tar file
+  unarchive:
+    src: "/usr/local/apache-tomcat-{{tomcat_version}}.tar.gz"
+    dest: /usr/local
+    remote_src: yes
+    
+- name: renaming tomcat home
+  command: mv /usr/local/apache-tomcat-{{tomcat_version}} /usr/local/tomcat  
+      
+- name: start tomcat
+  shell: nohup /usr/local/tomcat/bin/stratup.sh &
