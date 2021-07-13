@@ -33,7 +33,7 @@
   unarchive:
     src: "/usr/local/apache-tomcat-{{tomcat_version}}.tar.gz"
     dest: /usr/local
-    remote_src: yes
+    remote_src: no
     
 - name: renaming tomcat home
   command: mv /usr/local/apache-tomcat-{{tomcat_version}} /usr/local/tomcat  
